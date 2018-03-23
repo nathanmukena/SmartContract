@@ -5,9 +5,9 @@ class Token():
     Basic settings for an NEP5 Token and crowdsale
     """
 
-    name = 'NEX Template'
+    name = 'GAGE'
 
-    symbol = 'NXT'
+    symbol = 'GGE'
 
     decimals = 8
 
@@ -17,7 +17,7 @@ class Token():
 
     in_circulation_key = b'in_circulation'
 
-    total_supply = 10000000 * 100000000  # 10m total supply * 10^8 ( decimals)
+    total_supply = 100000000 * 100000000  # 100m total supply * 10^8 ( decimals)
 
     initial_amount = 2500000 * 100000000  # 2.5m to owners * 10^8
 
