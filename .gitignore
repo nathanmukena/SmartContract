@@ -3,3 +3,4 @@ venv
 *.avm
 .idea
 __pycache__
+.vscode
