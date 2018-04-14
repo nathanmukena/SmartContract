@@ -8,48 +8,87 @@
 <p align="center">A template for NEP5 Compliant Tokens on the NEO platform</p>
 <hr/>
 
+#### original ReadMe.md
+https://github.com/neonexchange/neo-ico-template/blob/master/README.md
+
 #### Considerations
 
-An article describing this template is available here:
+Useful links:
 
 https://medium.com/neon-exchange/nex-ico-template-4ca7ba19fc8b
+https://github.com/CityOfZion/neo-privatenet-docker
+https://www.youtube.com/watch?v=yLPEsst_SVw
 
-#### Requirements
+#### Creating a private network
 
-Usage requires Python 3.4 or 3.5.
+1. Create AWS account and deploy an Amazon Linux AMI
 
+2. SSH via putty:: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html
 
-#### Installation
-
-Clone the repository and navigate into the project directory. 
-Make a Python 3 virtual environment and activate it via
-
-```shell
-python3 -m venv venv
-source venv/bin/activate
+3. installing docker on Amazon Linux AMI:: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html
+```sudo yum update -y
+sudo yum install -y docker
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+logout
 ```
 
-or to explicitly install Python 3.5 via
+4. run NEO nodes:: https://hub.docker.com/r/cityofzion/neo-privatenet/
+```docker info #just a check
+docker pull cityofzion/neo-privatenet
+docker run --rm -d --name neo-privatenet -p 20333-20336:20333-20336/tcp -p 30333-30336:30333-30336/tcp cityofzion/neo-privatenet
+```
 
-    virtualenv -p /usr/local/bin/python3.5 venv
-    source venv/bin/activate
+Additional Ref:
+https://docs.aws.amazon.com/cli/latest/userguide/awscli-install-linux.html
+https://medium.com/@gubanotorious/installing-and-running-neo-python-on-windows-10-284fb518b213
 
-Then install the requirements via
+#### Creating your local Env
 
-```shell
+ref: https://medium.com/@gubanotorious/installing-and-running-neo-python-on-windows-10-284fb518b213
+
+1. Make sure you have Python 3.6
+    a. go to Environment Variables
+    b. look for the following in path:
+```C:\<your_python_install_path>\Python36
+C:\<your_python_install_path>\Python36\Scripts
+```
+
+2. clone neo-python
+```C:\> git clone https://github.com/CityOfZion/neo-python.git c:/<your_folder_path>/neo-python
+```
+
+3. make a copy (for debugging?)
+```C:\> robocopy c:\<your_folder_path>\neo-python c:\<your_folder_path\neo-python-debug /s
+```
+
+4. Open Windows PowerShell: https://docs.microsoft.com/en-us/windows/wsl/install-win10
+```Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+restart
+```
+
+5. download Ubuntu: https://www.microsoft.com/en-ca/store/p/ubuntu/9nblggh4msv6?rtc=1
+
+6. install neo-python: https://github.com/CityOfZion/neo-python#getting-started
+```apt-get install software-properties-common python-software-properties
+add-apt-repository ppa:deadsnakes/ppa
+apt-get update
+apt-get install python3.6 python3.6-dev python3.6-venv python3-pip libleveldb-dev libssl-dev g++
+
+cd neo-python
+apt-get install python3-venv
+python3 -m venv venv
+source venv/bin/activate    ** this line is important for part 4
+pip install -e .
 pip install -r requirements.txt
 ```
 
-#### Compilation
-
-The template may be compiled as follows
-
-```python
-from boa.compiler import Compiler
-
-Compiler.load_and_save('ico_template.py')
+7. pull Nathan's smartcontract: https://github.com/nathanmukena/SmartContract
+```cd ../SmartContract
+python3
+>> from boa.compiler import Compiler
+>> Compiler.load_and_save('ico_template.py')
 ```
-
 
 This will compile your template to `ico_template.avm`
 
