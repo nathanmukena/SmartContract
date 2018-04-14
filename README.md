@@ -48,22 +48,26 @@ https://medium.com/@gubanotorious/installing-and-running-neo-python-on-windows-1
 ref: https://medium.com/@gubanotorious/installing-and-running-neo-python-on-windows-10-284fb518b213
 
 1. Make sure you have Python 3.6
-    a. go to Environment Variables
-    b. look for the following in path:
-```C:\<your_python_install_path>\Python36
-C:\<your_python_install_path>\Python36\Scripts
-```
+    1. go to Environment Variables
+    2. look for the following in path:
+    ```
+    C:\<your_python_install_path>\Python36
+    C:\<your_python_install_path>\Python36\Scripts
+    ```
 
 2. clone neo-python
-```C:\> git clone https://github.com/CityOfZion/neo-python.git c:/<your_folder_path>/neo-python
+```
+C:\> git clone https://github.com/CityOfZion/neo-python.git c:/<your_folder_path>/neo-python
 ```
 
-3. make a copy (for debugging?)
-```C:\> robocopy c:\<your_folder_path>\neo-python c:\<your_folder_path\neo-python-debug /s
+3. make a debug copy
+```
+C:\> robocopy c:\<your_folder_path>\neo-python c:\<your_folder_path\neo-python-debug /s
 ```
 
 4. Open Windows PowerShell: https://docs.microsoft.com/en-us/windows/wsl/install-win10
-```Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+```
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 restart
 ```
 
@@ -84,7 +88,8 @@ pip install -r requirements.txt
 ```
 
 7. pull Nathan's smartcontract: https://github.com/nathanmukena/SmartContract
-```cd ../SmartContract
+```
+cd ../SmartContract
 python3
 >> from boa.compiler import Compiler
 >> Compiler.load_and_save('ico_template.py')
